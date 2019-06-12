@@ -16,3 +16,13 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['namespace' => 'API'], function () {
+
+    Route::post('/savecompany', 'CompanyController@saveCompanyData');
+    Route::get('/getcompany/{id}', 'CompanyController@getCompanyData');
+    Route::get('/loadcompany', 'CompanyController@loadAllCompanies');
+    Route::post('/updatecompany', 'CompanyController@updateCompanyData');
+    Route::delete('/deletecompany/{id}', 'CompanyController@deleteCompany');
+
+});

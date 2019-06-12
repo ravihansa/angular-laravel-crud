@@ -17,7 +17,8 @@ import { CompanyService } from './../../../shared/services/company.service';
 })
 export class CompanyComponent implements OnInit {
 
-  companyList: Company[];
+  companyList = [];
+  // companyList: Company[];
   comMessage: string;
   // tslint:disable-next-line:max-line-length
   emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -40,7 +41,7 @@ export class CompanyComponent implements OnInit {
       form.reset();
     }
     this.companyService.selectedCompany = {
-      _id: '',
+      id: '',
       name: '',
       email: '',
       logoPath: '',
@@ -50,7 +51,7 @@ export class CompanyComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (form.value._id === '') {
+    if (form.value.id === '') {
       this.companyService.saveCompany(form.value).subscribe((res) => {
         this.resetForm();
         this.refreshCompanyList();
@@ -75,7 +76,7 @@ export class CompanyComponent implements OnInit {
 
   onEdit(company: Company) {
     this.companyService.selectedCompany = Object.assign({}, company);
-    this.getCompanyLogoUrl(company._id);
+    this.getCompanyLogoUrl(company.id);
   }
 
   onDelete(id: string) {
@@ -94,7 +95,23 @@ export class CompanyComponent implements OnInit {
 
   refreshCompanyList() {
     this.companyService.getCompanyList().subscribe((res) => {
-      this.companyService.companies = res as Company[];
+      this.companyList = [];
+      if (res['status']) {
+        if (res['data']['company']) {
+          this.companyList = [];
+          for (let i in res['data']['company']) {
+            const data: Company = {
+              id: res['data']['company'][i]['id'],
+              name: res['data']['company'][i]['name'],
+              email: res['data']['company'][i]['email'],
+              webSite: res['data']['company'][i]['web_site'],
+              logoPath: res['data']['company'][i]['logo_path']
+            };
+            this.companyList.push(data);
+          }
+          this.companyService.companies = this.companyList;
+        }
+      }
       if (this.companyService.companies.length === 0) {
         this.comMessage = 'No companies added';
       } else {
@@ -166,7 +183,7 @@ export class CompanyComponent implements OnInit {
   getCompanyLogoUrl(id: string) {
     this.companyService.getCompany(id).subscribe((res) => {
      // tslint:disable-next-line:no-string-literal
-     this.logoUrl$ = res['imgUrl'];
+     this.logoUrl$ = res['company']['logo_path'];
     },
     err => {
       console.log(err);

@@ -13,7 +13,7 @@
           </div>
       </ng-template> 
     </div>
-      <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="companyService.selectedCompany._id">
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="companyService.selectedCompany.id">
     <div class="form-group">
       <label>Company Name</label>
       <input class="form-control" name="name" #name="ngModel" [(ngModel)]="companyService.selectedCompany.name" placeholder="Company Name" required>
@@ -46,15 +46,15 @@
           <td>
             <a class="btn" (click)="Image.click()">
               <i class="fa fa-upload"></i>
-              <input hidden type="file" name="logo" #Image accept="image/*" (change)="uploadCompanyLogo($event, company._id, company)">
+              <input hidden type="file" name="logo" #Image accept="image/*" (change)="uploadCompanyLogo($event, company.id, company)">
             </a>
             <a class="btn" (click)="onEdit(company)">
               <i class="fa fa-pencil-square-o"></i>
             </a>
-            <a class="btn" (click)="onDelete(company._id)">
+            <a class="btn" (click)="onDelete(company.id)">
               <i class="fa fa-trash-o"></i>
             </a>
-            <a class="btn" (click)="addEmployee(company._id)">
+            <a class="btn" (click)="addEmployee(company.id)">
               <i class="fa fa-user-plus"></i>
             </a>
           </td>
