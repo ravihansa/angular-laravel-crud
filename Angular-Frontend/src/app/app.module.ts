@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { UserComponent } from './components/user/user.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { SignUpComponent } from './components/user/sign-up/sign-up.component';
 import { SignInComponent } from './components/user/sign-in/sign-in.component';
 import { EmployeesComponent } from './components/employees/employees.component';
 import { CompaniesComponent } from './components/companies/companies.component';
@@ -23,13 +24,15 @@ import { UserService } from './shared/services/user.service';
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeesComponent,
-    EmployeeComponent,
-    CompaniesComponent,
-    CompanyComponent,
-    NavbarComponent,
     UserComponent,
-    SignInComponent
+    NavbarComponent,
+    SignInComponent,
+    SignUpComponent,
+    CompanyComponent,
+    EmployeeComponent,
+    EmployeesComponent,
+    CompaniesComponent,
+
   ],
   imports: [
     FormsModule,

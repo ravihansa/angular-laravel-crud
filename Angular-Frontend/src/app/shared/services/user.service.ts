@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from './../models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 @Injectable({
@@ -6,9 +7,21 @@ import { environment } from '../../../environments/environment';
 })
 export class UserService {
 
+  selectedUser: User = {
+    firstName: '',
+    lastName: '',
+    phoneNo: '',
+    email: '',
+    password: '',
+  };
+
   noAuthHeader = { headers: new HttpHeaders({ NoAuth: 'True' }) };
 
   constructor(private http: HttpClient) { }
+
+  registerUser(user: User) {
+    return this.http.post(environment.apiBaseUrl + '/register', user, this.noAuthHeader);
+  }
 
   loginUser(authCredentials) {
     return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentials, this.noAuthHeader);

@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['namespace' => 'API'], function () {
+Route::group(['middleware' => ['jwt.verify'], 'namespace' => 'API'], function () {
 
     Route::post('/savecompany', 'CompanyController@saveCompanyData');
     Route::get('/getcompany/{id}', 'CompanyController@getCompanyData');
@@ -30,5 +30,12 @@ Route::group(['namespace' => 'API'], function () {
     Route::get('/loademployee/{id}', 'EmployeeController@loadAllEmployees');
     Route::put('/updateemployee/{id}', 'EmployeeController@updateEmployeeData');
     Route::delete('/deleteemployee/{id}', 'EmployeeController@deleteEmployee');
+
+});
+
+Route::group(['namespace' => 'API'], function() {
+   
+    Route::post('/register', 'UserController@register');
+    Route::post('/authenticate', 'UserController@authenticate');
 
 });

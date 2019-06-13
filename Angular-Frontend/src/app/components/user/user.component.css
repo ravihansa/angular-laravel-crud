@@ -58,7 +58,7 @@ h2.inactive {
   
   h2.active {
     color: #0d0d0d;
-    border-bottom: 2px solid #5fbae9;
+    border-bottom: 2px solid #040708;
 }
 
 /* ANIMATIONS */
@@ -150,7 +150,7 @@ h2.inactive {
     bottom: -10px;
     width: 0;
     height: 2px;
-    background-color: #56baed;
+    /* background-color: #56baed; */
     content: "";
     transition: width 0.2s;
   }
