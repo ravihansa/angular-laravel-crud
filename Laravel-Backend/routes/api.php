@@ -25,4 +25,10 @@ Route::group(['namespace' => 'API'], function () {
     Route::post('/updatecompany', 'CompanyController@updateCompanyData');
     Route::delete('/deletecompany/{id}', 'CompanyController@deleteCompany');
 
+    Route::post('/saveemployee', 'EmployeeController@saveEmployeeData');
+    Route::get('/getemployee/{id}', 'EmployeeController@getEmployeeData');
+    Route::get('/loademployee/{id}', 'EmployeeController@loadAllEmployees');
+    Route::put('/updateemployee/{id}', 'EmployeeController@updateEmployeeData');
+    Route::delete('/deleteemployee/{id}', 'EmployeeController@deleteEmployee');
+
 });

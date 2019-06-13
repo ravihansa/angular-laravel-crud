@@ -41,7 +41,7 @@ export class EmployeeComponent implements OnInit {
       form.reset();
     }
     this.employeeService.selectedEmployee = {
-      _id: '',
+      id: '',
       firstName: '',
       lastName: '',
       email: '',
@@ -51,7 +51,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (form.value._id === '') {
+    if (form.value.id === '') {
       this.employeeService.saveEmployee(form.value).subscribe((res) => {
         this.resetForm();
         this.refreshEmployeeList();
@@ -62,7 +62,7 @@ export class EmployeeComponent implements OnInit {
         console.log(err);
       });
     } else {
-      this.employeeService.updateEmployee(form.value).subscribe((res) => {
+      this.employeeService.updateEmployee(form.value.id, form.value).subscribe((res) => {
         this.resetForm();
         this.refreshEmployeeList();
         this.toastr.success('Successfully Updated!');
@@ -94,7 +94,23 @@ export class EmployeeComponent implements OnInit {
 
   refreshEmployeeList() {
     this.employeeService.getEmployeeList(this.companyId).subscribe((res) => {
-      this.employeeService.employees = res as Employee[];
+      if (res['status']) {
+        if (res['data']['employee']) {
+          this.employeeList = [];
+          for (let i in res['data']['employee']) {
+            const data: Employee = {
+              id: res['data']['employee'][i]['id'],
+              firstName: res['data']['employee'][i]['first_name'],
+              lastName: res['data']['employee'][i]['last_name'],
+              email: res['data']['employee'][i]['email'],
+              phoneNo: res['data']['employee'][i]['phone_number'],
+              companyId: res['data']['employee'][i]['company_id']
+            };
+            this.employeeList.push(data);
+          }
+          this.employeeService.employees = this.employeeList;
+        }
+      }
       if (this.employeeService.employees.length === 0) {
         this.empMessage = 'No employees added';
       } else {

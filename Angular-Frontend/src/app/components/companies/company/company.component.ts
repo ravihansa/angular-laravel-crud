@@ -17,8 +17,7 @@ import { CompanyService } from './../../../shared/services/company.service';
 })
 export class CompanyComponent implements OnInit {
 
-  companyList = [];
-  // companyList: Company[];
+  companyList: Company[];
   comMessage: string;
   // tslint:disable-next-line:max-line-length
   emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -95,7 +94,6 @@ export class CompanyComponent implements OnInit {
 
   refreshCompanyList() {
     this.companyService.getCompanyList().subscribe((res) => {
-      this.companyList = [];
       if (res['status']) {
         if (res['data']['company']) {
           this.companyList = [];

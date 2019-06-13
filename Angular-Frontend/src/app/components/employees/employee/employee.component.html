@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-6">
     <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
-      <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="employeeService.selectedEmployee._id">
+      <input type="hidden" name="id" #id="ngModel" [(ngModel)]="employeeService.selectedEmployee.id">
       <input type="hidden" name="companyId" #companyId="ngModel" [(ngModel)]="employeeService.selectedEmployee.companyId">
     <div class="form-group">
       <label>First Name</label>
@@ -40,7 +40,7 @@
             <a class="btn" (click)="onEdit(employee)">
               <i class="fa fa-pencil-square-o"></i>
             </a>
-            <a class="btn" (click)="onDelete(employee._id)">
+            <a class="btn" (click)="onDelete(employee.id)">
               <i class="fa fa-trash-o"></i>
             </a>
           </td>

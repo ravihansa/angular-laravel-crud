@@ -25,7 +25,7 @@ class CompanyController extends Controller
 
     public function getCompanyData (Request $request, $id){
 
-        $companyDetails = Company::where('id',$id)->first();
+        $companyDetails = Company::where('id', $id)->first();
         if(isset($companyDetails)) {
             return response()->json([
                 'status' =>true,
@@ -69,7 +69,7 @@ class CompanyController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Sucess',
-                'company'     => $newCompany
+                'isUpdated'     => $newCompany
             ], 200);
         } else {
             return response()->json([
@@ -86,9 +86,7 @@ class CompanyController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'sucess',
-                'data'   => array(
-                                'company'     => $deleteCompany,
-                            )
+                'isDeleted'     => $deleteCompany,
             ], 200);
         } else {
             return response()->json([

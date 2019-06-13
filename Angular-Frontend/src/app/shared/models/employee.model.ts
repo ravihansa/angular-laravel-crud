@@ -1,6 +1,5 @@
 export class Employee {
-    // tslint:disable-next-line:variable-name
-    _id: string;
+    id: string;
     firstName: string;
     lastName: string;
     phoneNo: string;

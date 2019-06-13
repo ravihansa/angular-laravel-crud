@@ -23,8 +23,8 @@ export class EmployeeService {
     return this.http.get(environment.apiBaseUrl + '/loademployee' + `/${id}`);
   }
 
-  updateEmployee(employee: Employee) {
-    return this.http.post(environment.apiBaseUrl + '/updateemployee', employee);
+  updateEmployee(id: string, employee: Employee) {
+    return this.http.put(environment.apiBaseUrl + '/updateemployee' + `/${id}`, employee);
   }
 
   deleteEmployee(id: string) {
